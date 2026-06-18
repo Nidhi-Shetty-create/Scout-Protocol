@@ -1,30 +1,16 @@
 # Scout Protocol
 
-Scout Protocol is a Solidity-based economic protocol that rewards early supporters who discover promising content before it becomes viral.
-
-## Problem
-
-Creators often struggle to gain early support, while supporters who identify high-potential content receive no direct incentive.
-
-Scout Protocol aligns incentives by allowing a limited number of early supporters to participate in a shared reward pool.
-
-## How It Works
-
-1. Creator registers content and seeds the initial pool.
-2. Only the first 3 supporters can support the content.
-3. Supporters contribute ETH to the reward pool.
-4. If the content becomes viral, rewards are distributed automatically.
-5. No further participation is allowed after finalization.
+Scout Protocol is a decentralized content discovery and reward system built using Solidity and Foundry.
 
 ## Features
 
-- Early supporter reward mechanism
-- Fixed scarcity (maximum 3 supporters)
-- Viral payout distribution
-- Protection against double payouts
-- CEI (Checks-Effects-Interactions) security pattern
-- Foundry unit tests
-- Local deployment using Anvil
+- Register content on-chain
+- Support creators through early contributions
+- Limit early supporter slots to the first 3 supporters
+- Mark content as viral
+- Automatically distribute rewards to early supporters
+- Prevent interactions with already viral content
+- Comprehensive Foundry test suite
 
 ## Tech Stack
 
@@ -33,17 +19,46 @@ Scout Protocol aligns incentives by allowing a limited number of early supporter
 - Anvil
 - Forge
 - Cast
+- GitHub Actions
 
-## Validation Performed
+## Smart Contract Functions
 
-- Contract deployment
-- Creator registration
-- Supporter onboarding
-- Viral payout execution
-- Double payout prevention
-- Viral state enforcement
-- Early supporter scarcity enforcement
+### registerContent(string title, string ipfsHash)
 
-## Status
+Registers new content by paying the required registration fee.
 
-Prototype completed and validated locally using Foundry and Anvil.
+### supportContent(uint256 contentId)
+
+Allows users to support content before it becomes viral.
+
+### markViral(uint256 contentId)
+
+Marks eligible content as viral and distributes rewards.
+
+### getContent(uint256 contentId)
+
+Returns all details associated with a content item.
+
+## Testing
+
+Run tests using:
+
+```bash
+forge test
+```
+
+## Local Deployment
+
+Deploy using:
+
+```bash
+forge create src/EarlySupporterReward.sol:EarlySupporterReward \
+--rpc-url http://127.0.0.1:8545 \
+--private-key <PRIVATE_KEY> \
+--broadcast
+```
+
+## Author
+
+Nidhi Shetty
+GitHub: https://github.com/Nidhi-Shetty-create
